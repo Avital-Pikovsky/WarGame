@@ -2,46 +2,54 @@
 
 #include <stdexcept>
 #include <math.h>
-#include "Board.hpp"
+#include <vector>
 
 using namespace std;
 
-namespace WarGame {
-    class Soldier{
-        protected:
+namespace WarGame
+{
+    class Soldier
+    {
+    protected:
         uint player_number;
-        uint points; //initial_health_points
-        uint damage; //damage_per_activity
+        uint points;       //initial_health_points
+        uint damage;       //damage_per_activity
         const uint health; //health_per_activity
 
         //Pitágoras - a^2+b^2=c^2
-        double distance(uint x1, uint y1, uint x2, uint y2){
-                return sqrt(pow(x1 - x2,2) + pow(y1 - y2,2));
+        double distance(int x1, int y1, int x2, int y2)
+        {
+            return sqrt(pow(x1 - x2, 2) + pow(y1 - y2, 2));
         }
 
-        public:
+    public:
         //Constructor:
-        Soldier(uint n, uint p, uint d, uint h):
-        player_number(n),points(p), damage(d), health(h){}
+        Soldier(uint n, int p, uint d, uint h) : player_number(n), points(p), damage(d), health(h) {}
 
-        virtual void attack(vector<vector<Soldier*>> &board,pair<int,int> location) = 0; 
+        virtual ~Soldier() {}
+
+        virtual void attack(vector<vector<Soldier *>> &board, pair<int, int> location) = 0;
 
         //Getters & setters:
-        uint get_player_number(){
+        uint get_player_number()
+        {
             return player_number;
         }
-        uint get_points(){
+        int get_points()
+        {
             return points;
         }
-        uint get_damage(){
+        uint get_damage()
+        {
             return damage;
         }
-        uint get_health(){
+        uint get_health()
+        {
             return health;
         }
-        void set_points(uint p){
+        void set_points(uint p)
+        {
             points = p;
         }
-
     };
-}
+} // namespace WarGame

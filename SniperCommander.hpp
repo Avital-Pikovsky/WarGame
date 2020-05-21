@@ -1,19 +1,14 @@
-#include <string>
-#include <vector>
-#include <stdexcept>
-#include "Soldier.hpp"
+#pragma once
 #include "Sniper.hpp"
 
 namespace WarGame {
 
     class SniperCommander: public Sniper{
         public:
-        SniperCommander(uint player_number, uint points = 120, uint damage = 100, uint health = 0):
+        SniperCommander(uint player_number, int points = 120, uint damage = 100, const uint health = 120):
         Sniper(player_number ,points, damage, health){}
 
-        void attack(vector<vector<Soldier*>> &board,pair<int,int> location){
-            
-        }
+        void attack(vector<vector<Soldier*>> &board,pair<int,int> location);
 
     };
 }

@@ -4,18 +4,19 @@
  **/
 #include "Soldier.hpp"
 #include "Board.hpp"
+#include <iostream>
 
 using namespace std;
 
 namespace WarGame
 {
 
-    Soldier *&Board::operator[](std::pair<int, int> location)//מחזיר רפרנס ויכול להחזיר פוינטר
+    Soldier *&Board::operator[](std::pair<int, int> location) //set
     {
-        return this->board[location.second][location.second];
+        return this->board[location.first][location.second];
     }
 
-    Soldier *Board::operator[](std::pair<int, int> location) const//just get
+    Soldier *Board::operator[](std::pair<int, int> location) const //get
     {
         return this->board[location.first][location.second];
     }
@@ -46,11 +47,11 @@ namespace WarGame
             throw invalid_argument("The move is illegal");
 
         //Out of the board
-        if (target.first >= board.size() || target.first < 0 || target.second >= board.size() || target.second < 0)
+        if (target.first >= board.size() || target.first < 0 || target.second >= board[0].size() || target.second < 0)
             throw invalid_argument("Out of the board");
 
-        (*this)[source] = nullptr;
         (*this)[target] = s;
+        (*this)[source] = nullptr;
 
         s->attack(board, target);
     }

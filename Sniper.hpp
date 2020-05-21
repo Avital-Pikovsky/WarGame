@@ -1,6 +1,4 @@
-#include <string>
-#include <vector>
-#include <stdexcept>
+#pragma once
 #include "Soldier.hpp"
 
 namespace WarGame
@@ -9,11 +7,8 @@ namespace WarGame
     class Sniper : public Soldier
     {
     public:
-        Sniper(uint player_number, uint points = 100, uint damage = 50, uint health = 0) :
-        Soldier(player_number, points, damage, health) {}
+        Sniper(uint player_number, int points = 100, uint damage = 50, const uint health = 100) : Soldier(player_number, points, damage, health) {}
 
-        void attack(vector<vector<Soldier *>> &board, pair<int, int> location){
-
-        }
+        void attack(vector<vector<Soldier *>> &board, pair<int, int> location);
     };
 } // namespace WarGame
