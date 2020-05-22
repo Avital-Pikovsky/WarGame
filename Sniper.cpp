@@ -1,31 +1,44 @@
 #include "Sniper.hpp"
+#include <iostream>
 namespace WarGame
 {
 
-void Sniper::attack(vector<vector<Soldier *>> &board, pair<int, int> location){
+    void Sniper::attack(vector<vector<Soldier *>> &board, pair<int, int> location)
+    {
+        pair<double, Soldier *> strongest = make_pair(max(board.size(), board[0].size()), nullptr);
 
-            pair<double, Soldier*> strongest = make_pair(max(board.size(),board[0].size()), nullptr);
+        int fir, sec;
 
-            for(int i = 0; i < board.size(); i++){
-                for(int j = 0; j < board[i].size(); j++){
-                    Soldier *s = board[i][j];
+        for (int i = 0; i < board.size(); i++)
+        {
+            for (int j = 0; j < board[0].size(); j++)
+            {
+                Soldier *s = board[i][j];
 
-                    if(s!=nullptr && s->get_player_number()!=player_number){
-                        double points = s->get_points();
-                        if(points > strongest.first){
-                            strongest.first = points;
-                            strongest.second = s;
-                        }
+                if (s != nullptr && s->get_player_number() != player_number)
+                {
+                    double points = s->get_points();
+                    if (points > strongest.first)
+                    {
+                        strongest.first = points;
+                        strongest.second = s;
+                        fir = i;
+                        sec = j;
                     }
                 }
             }
-            int new_points = strongest.second -> get_points() - damage;
-            if(new_points <= 0) {
-                delete strongest.second;
-                strongest.second = nullptr;
+        }
+        if (strongest.second != nullptr)
+        {
+            int new_points = strongest.second->get_points() - damage;
+            if (new_points <= 0)
+            {
+                delete board[fir][sec];
+                board[fir][sec] = nullptr;
+                
             }
             else
-            strongest.second -> set_points(new_points);
-
+                strongest.second->set_points(new_points);
         }
-}
+    }
+} // namespace WarGame

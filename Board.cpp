@@ -26,6 +26,14 @@ namespace WarGame
         Soldier *s = (*this)[source];
         std::pair<int, int> target;
 
+        if (s == nullptr || s->get_player_number() != player_number)
+        {
+            cout << source.first << endl;
+            cout << source.second << endl;
+
+            throw invalid_argument("The move is illegal");
+        }
+
         switch (direction)
         {
         case Up:
@@ -43,7 +51,7 @@ namespace WarGame
         }
 
         //If the move is illegal, it throws "std::invalid_argument"
-        if (s == nullptr || s->get_player_number() != player_number || (*this)[target] != nullptr)
+        if ((*this)[target] != nullptr)
             throw invalid_argument("The move is illegal");
 
         //Out of the board

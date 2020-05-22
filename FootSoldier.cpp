@@ -7,8 +7,9 @@ namespace WarGame
 
     void FootSoldier::attack(vector<vector<Soldier *>> &board, pair<int, int> location)
     {
+        pair<double, Soldier *> closest = make_pair(distance(board.size(), board[0].size(), 0, 0), nullptr);
 
-        pair<double, Soldier *> closest = make_pair(1000, nullptr);
+        int fir,sec;
 
         for (int i = 0; i < board.size(); i++)
         {
@@ -23,19 +24,24 @@ namespace WarGame
                     {
                         closest.first = dis;
                         closest.second = s;
+                        fir=i;
+                        sec=j;
                     }
                 }
             }
         }
-        int new_points = closest.second->get_points() - damage;
-        if (new_points <= 0)
+        if (closest.second != nullptr)
         {
-
-            delete closest.second;
-            closest.second = nullptr;
-        }
-        else{
-            closest.second->set_points(new_points);
+            int new_points = closest.second->get_points() - damage;
+            if (new_points <= 0)
+            {
+                delete board[fir][sec];
+                board[fir][sec] = nullptr;
+            }
+            else
+            {
+                closest.second->set_points(new_points);
+            }
         }
     }
 } // namespace WarGame

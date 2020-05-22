@@ -19,7 +19,7 @@ namespace WarGame
         //Pitágoras - a^2+b^2=c^2
         double distance(int x1, int y1, int x2, int y2)
         {
-            return sqrt(pow(x1 - x2, 2) + pow(y1 - y2, 2));
+            return sqrt(pow(x1 - x2, 2) + pow(y1 - y2, 2)*(1.0));
         }
 
     public:
