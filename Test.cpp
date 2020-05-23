@@ -133,13 +133,13 @@ TEST_CASE("Soldiers of player 2 moves right or left and attacks.")
 }
 TEST_CASE("Check points of player 1.")
 {
-    CHECK((board[{1, 0}]->get_points()) == 50);
-    CHECK((board[{1, 2}]->get_points()) == 100);
+    CHECK((board[{1, 0}]->get_points()) == 100);
+    CHECK((board[{1, 2}]->get_points()) == 50);
     CHECK((board[{1, 4}]->get_points()) == 100);
     CHECK((board[{1, 6}]->get_points()) == 100);
     CHECK((board[{2, 1}]->get_points()) == 40);
     CHECK((board[{2, 3}]->get_points()) == 60);
-    CHECK((board[{2, 5}]->get_points()) == 10);
+    CHECK((board[{2, 5}]->get_points()) == 90);
     CHECK((board[{2, 7}]->get_points()) == 60);
 
     CHECK(board.has_soldiers(1));
@@ -156,8 +156,8 @@ TEST_CASE("Soldiers of player 1 moves right or left and attacks.")
 }
 TEST_CASE("Check points of player 1.")
 {
-    CHECK((board[{2, 0}]->get_points()) == 50);
-    CHECK((board[{2, 2}]->get_points()) == 100);
+    CHECK((board[{2, 0}]->get_points()) == 100);
+    CHECK((board[{2, 2}]->get_points()) == 50);
     CHECK((board[{2, 4}]->get_points()) == 100);
 
     CHECK(board.has_soldiers(1));

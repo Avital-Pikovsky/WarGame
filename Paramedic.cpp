@@ -19,7 +19,7 @@ namespace WarGame
 
                     if (s != nullptr && s->get_player_number() == player_number)
                     {
-                        if (k != i && l != j)
+                        if (!(k == i && l == j))
                             s->set_points(s->get_health());
                     }
                 }
