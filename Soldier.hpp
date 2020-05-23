@@ -12,7 +12,7 @@ namespace WarGame
     {
     protected:
         uint player_number;
-        uint points;       //initial_health_points
+        int points;       //initial_health_points
         uint damage;       //damage_per_activity
         const uint health; //health_per_activity
 
@@ -47,7 +47,7 @@ namespace WarGame
         {
             return health;
         }
-        void set_points(uint p)
+        void set_points(int p)
         {
             points = p;
         }

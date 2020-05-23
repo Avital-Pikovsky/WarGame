@@ -5,7 +5,7 @@ namespace WarGame
 
     void Sniper::attack(vector<vector<Soldier *>> &board, pair<int, int> location)
     {
-        pair<double, Soldier *> strongest = make_pair(max(board.size(), board[0].size()), nullptr);
+        pair<double, Soldier *> strongest = make_pair(0, nullptr);
 
         int fir, sec;
 
@@ -34,8 +34,7 @@ namespace WarGame
             if (new_points <= 0)
             {
                 delete board[fir][sec];
-                board[fir][sec] = nullptr;
-                
+                board[fir][sec] = nullptr;                
             }
             else
                 strongest.second->set_points(new_points);

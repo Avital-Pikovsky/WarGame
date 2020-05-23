@@ -178,6 +178,4 @@ TEST_CASE("Check points of player 2.")
 
     CHECK(board.has_soldiers(2));
 
-
  }
-

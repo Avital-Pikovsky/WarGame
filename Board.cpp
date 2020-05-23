@@ -13,12 +13,12 @@ namespace WarGame
 
     Soldier *&Board::operator[](std::pair<int, int> location) //set
     {
-        return this->board[location.first][location.second];
+        return board[location.first][location.second];
     }
 
     Soldier *Board::operator[](std::pair<int, int> location) const //get
     {
-        return this->board[location.first][location.second];
+        return board[location.first][location.second];
     }
 
     void Board::move(uint player_number, std::pair<int, int> source, MoveDIR direction)
@@ -28,9 +28,6 @@ namespace WarGame
 
         if (s == nullptr || s->get_player_number() != player_number)
         {
-            cout << source.first << endl;
-            cout << source.second << endl;
-
             throw invalid_argument("The move is illegal");
         }
 
@@ -50,13 +47,13 @@ namespace WarGame
             break;
         }
 
-        //If the move is illegal, it throws "std::invalid_argument"
-        if ((*this)[target] != nullptr)
-            throw invalid_argument("The move is illegal");
-
         //Out of the board
         if (target.first >= board.size() || target.first < 0 || target.second >= board[0].size() || target.second < 0)
             throw invalid_argument("Out of the board");
+
+        //If the move is illegal, it throws "std::invalid_argument"
+        if ((*this)[target] != nullptr)
+            throw invalid_argument("The move is illegal");
 
         (*this)[target] = s;
         (*this)[source] = nullptr;

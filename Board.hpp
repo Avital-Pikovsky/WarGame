@@ -24,10 +24,14 @@ class Board {
       board(numRows, std::vector<Soldier*>(numCols, nullptr)) {}
 
 
-    //  ~Board()
-    // {
-    //    delete;
-    // }
+   ~Board(){
+        for (int i=0; i<board.size(); i++) {
+            for (int j=0; j<board[0].size(); j++) {
+                    delete board[i][j];
+                    board[i][j] = nullptr;
+            }
+        }
+    }
     // operator for putting soldiers on the game-board during initialization.
     Soldier*& operator[](std::pair<int,int> location);
     
