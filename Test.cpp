@@ -15,34 +15,53 @@ using namespace std;
 using namespace WarGame;
 
 Board board(8, 8);
+vector<Soldier*> soldiers;
+
 
 TEST_CASE("Add soldiers for players")
 {
+    Soldier* vec = nullptr;
     // Add soldiers for player 1:
     CHECK(!board.has_soldiers(1));
 
-    CHECK_NOTHROW((board[{0, 1}] = new FootSoldier(1)));
-    CHECK_NOTHROW((board[{0, 3}] = new FootCommander(1)));
-    CHECK_NOTHROW((board[{0, 5}] = new FootSoldier(1)));
-    CHECK_NOTHROW((board[{0, 7}] = new Sniper(1)));
-    CHECK_NOTHROW((board[{1, 0}] = new SniperCommander(1)));
-    CHECK_NOTHROW((board[{1, 2}] = new Paramedic(1)));
-    CHECK_NOTHROW((board[{1, 4}] = new ParamedicCommander(1)));
-    CHECK_NOTHROW((board[{1, 6}] = new FootCommander(1)));
+    CHECK_NOTHROW(vec = (board[{0, 1}] = new FootSoldier(1)));
+    soldiers.push_back(vec);
+    CHECK_NOTHROW(vec = (board[{0, 3}] = new FootCommander(1)));
+    soldiers.push_back(vec);
+    CHECK_NOTHROW(vec = (board[{0, 5}] = new FootSoldier(1)));
+    soldiers.push_back(vec);
+    CHECK_NOTHROW(vec = (board[{0, 7}] = new Sniper(1)));
+    soldiers.push_back(vec);
+    CHECK_NOTHROW(vec = (board[{1, 0}] = new SniperCommander(1)));
+    soldiers.push_back(vec);
+    CHECK_NOTHROW(vec = (board[{1, 2}] = new Paramedic(1)));
+    soldiers.push_back(vec);
+    CHECK_NOTHROW(vec = (board[{1, 4}] = new ParamedicCommander(1)));
+    soldiers.push_back(vec);
+    CHECK_NOTHROW(vec = (board[{1, 6}] = new FootCommander(1)));
+    soldiers.push_back(vec);
 
     CHECK(board.has_soldiers(1));
 
     // Add soldiers for player 2:
     CHECK(!board.has_soldiers(2));
 
-    CHECK_NOTHROW((board[{7, 1}] = new FootSoldier(2)));        
-    CHECK_NOTHROW((board[{7, 3}] = new FootCommander(2)));      
-    CHECK_NOTHROW((board[{7, 5}] = new FootSoldier(2)));        
-    CHECK_NOTHROW((board[{7, 7}] = new Sniper(2)));             
-    CHECK_NOTHROW((board[{6, 0}] = new SniperCommander(2)));    
-    CHECK_NOTHROW((board[{6, 2}] = new Paramedic(2)));          
-    CHECK_NOTHROW((board[{6, 4}] = new ParamedicCommander(2))); 
-    CHECK_NOTHROW((board[{6, 6}] = new FootCommander(2)));      
+    CHECK_NOTHROW(vec = (board[{7, 1}] = new FootSoldier(2)));
+    soldiers.push_back(vec);
+    CHECK_NOTHROW(vec = (board[{7, 3}] = new FootCommander(2)));
+    soldiers.push_back(vec);
+    CHECK_NOTHROW(vec = (board[{7, 5}] = new FootSoldier(2)));
+    soldiers.push_back(vec);
+    CHECK_NOTHROW(vec = (board[{7, 7}] = new Sniper(2)));
+    soldiers.push_back(vec);
+    CHECK_NOTHROW(vec = (board[{6, 0}] = new SniperCommander(2)));
+    soldiers.push_back(vec);
+    CHECK_NOTHROW(vec = (board[{6, 2}] = new Paramedic(2)));
+    soldiers.push_back(vec);
+    CHECK_NOTHROW(vec = (board[{6, 4}] = new ParamedicCommander(2)));
+    soldiers.push_back(vec);
+    CHECK_NOTHROW(vec = (board[{6, 6}] = new FootCommander(2)));
+    soldiers.push_back(vec);
 
     CHECK(board.has_soldiers(2));
 }
@@ -152,7 +171,6 @@ TEST_CASE("Soldiers of player 1 moves right or left and attacks.")
     CHECK_NOTHROW(board.move(1, {1, 4}, Board::MoveDIR::Up));
 
     CHECK(board.has_soldiers(2));
-
 }
 TEST_CASE("Check points of player 1.")
 {
@@ -169,7 +187,6 @@ TEST_CASE("Soldiers of player 2 moves right or left and attacks.")
     CHECK_NOTHROW(board.move(2, {6, 6}, Board::MoveDIR::Left));
 
     CHECK(board.has_soldiers(1));
-
 }
 TEST_CASE("Check points of player 2.")
 {
@@ -177,5 +194,10 @@ TEST_CASE("Check points of player 2.")
     CHECK((board[{6, 5}]->get_points()) == 100);
 
     CHECK(board.has_soldiers(2));
+}
 
- }
+TEST_CASE("Delete soldiers."){
+    for(int i = 0; i < soldiers.size(); i++){
+        delete soldiers[i];
+    }
+}

@@ -35,7 +35,6 @@ namespace WarGame
             int new_points = closest.second->get_points() - damage;
             if (new_points <= 0)
             {
-                delete board[fir][sec];
                 board[fir][sec] = nullptr;
             }
             else
