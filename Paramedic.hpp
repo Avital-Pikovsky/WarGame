@@ -1,6 +1,5 @@
 #pragma once
 #include "Soldier.hpp"
-using namespace WarGame;
 
 namespace WarGame
 {
