@@ -31,6 +31,10 @@ namespace WarGame
             throw invalid_argument("The move is illegal");
         }
 
+        //Out of the board
+        if (source.first >= board.size() || source.first < 0 || source.second >= board[0].size() || source.second < 0)
+            throw invalid_argument("Out of the board");
+
         switch (direction)
         {
         case Up:
